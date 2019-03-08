@@ -13,35 +13,31 @@ namespace Senai.SpMedGroup.Manha.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuariosController : ControllerBase
+    public class MedicosController : ControllerBase
     {
-        private IUsuarioRepository UsuarioRepository { get; set; }
-
-        public UsuariosController()
+        private IMedicoRepository MedicoRepository { get; set; }
+        public MedicosController()
         {
-            UsuarioRepository = new UsuarioRepository();
+            MedicoRepository = new MedicoRepository();
         }
-
-        [HttpGet]
+        [HttpGet] 
         public IActionResult Get()
         {
             try
             {
-             
-                return Ok(UsuarioRepository.ListaUsuarios());
+                return Ok(MedicoRepository.ListarMedicos());
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
         [HttpPost]
-        public IActionResult Cadastrar(Usuarios usuario)
+        public IActionResult Post(Medicos medico)
         {
             try
             {
-                UsuarioRepository.Cadastrar(usuario);
+                MedicoRepository.Cadastrar(medico);
                 return Ok();
             }
             catch (Exception ex)
@@ -49,20 +45,5 @@ namespace Senai.SpMedGroup.Manha.Controllers
                 return BadRequest(ex.Message);
             }
         }
-
-        [HttpPut]
-        public IActionResult Atualizar(Usuarios usuario)
-        {
-            try
-            {
-                UsuarioRepository.Atualizar(usuario);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
     }
 }

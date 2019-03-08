@@ -36,7 +36,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
             using(SqlConnection con = new SqlConnection(StringConexao))
             {
 
-                string Select = "SELECT U.ID, U.NOME, U.ID_TIPO_USUARIO, U.EMAIL, U.SENHA, T.TIPO, U.DATA_NASCIMENTO FROM USUARIOS U JOIN TIPO_USUARIOS T ON U.ID_TIPO_USUARIO = T.ID ";
+                string Select = "SELECT U.ID, U.NOME, U.ID_TIPO_USUARIO, U.EMAIL, U.SENHA, T.TIPO, U.DATA_NASCIMENTO FROM USUARIOS U JOIN TIPO_USUARIO T ON U.ID_TIPO_USUARIO = T.ID ";
 
                 con.Open();
 
@@ -47,7 +47,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
                     {
                         while (sqr.Read())
                         {
-                            Usuarios usuarios = new Usuarios()
+                            Usuarios usuario = new Usuarios()
                             {
                                 Id = Convert.ToInt32(sqr["ID"]),
                                 Nome = sqr["NOME"].ToString(),
@@ -58,15 +58,15 @@ namespace Senai.SpMedGroup.Manha.Repositories
                                     Tipo = sqr["TIPO"].ToString(),
 
                                 },
-                                Nome = sqr["NOME"].ToString(),
-                                Nome = sqr["NOME"].ToString()
-
-                        }
+                                DataNascimento = Convert.ToDateTime(sqr["DATA_NASCIMENTO"]),
+                            };
+                            ListaUsuarios.Add(usuario);
                         }
                     }
-
+                    return ListaUsuarios;
             }
             }
+      
         }
     }
 }

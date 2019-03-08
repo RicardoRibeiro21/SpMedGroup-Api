@@ -9,60 +9,58 @@ using Senai.SpMedGroup.Manha.Interfaces;
 using Senai.SpMedGroup.Manha.Repositories;
 
 namespace Senai.SpMedGroup.Manha.Controllers
-{
+{   
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuariosController : ControllerBase
+    public class EspecializacaoController : ControllerBase
     {
-        private IUsuarioRepository UsuarioRepository { get; set; }
+        private IEspecializacaoRepository EspecializacaoRepository { get; set; }
 
-        public UsuariosController()
+        public EspecializacaoController()
         {
-            UsuarioRepository = new UsuarioRepository();
+            EspecializacaoRepository = new EspecializacaoRepository();
         }
-
         [HttpGet]
         public IActionResult Get()
         {
             try
             {
-             
-                return Ok(UsuarioRepository.ListaUsuarios());
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpPost]
-        public IActionResult Cadastrar(Usuarios usuario)
-        {
-            try
-            {
-                UsuarioRepository.Cadastrar(usuario);
-                return Ok();
+               
+                return Ok(EspecializacaoRepository.listarEspecializacoes());
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPost] 
+        public IActionResult Post(Especializacoes especializacao)
+        {
+            try
+            {
+                EspecializacaoRepository.Cadastrar(especializacao);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
 
+        }
         [HttpPut]
-        public IActionResult Atualizar(Usuarios usuario)
+        public IActionResult Put(Especializacoes especializacao)
         {
             try
             {
-                UsuarioRepository.Atualizar(usuario);
+                EspecializacaoRepository.Atualizar(especializacao);
                 return Ok();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
-        }
 
+        }
     }
 }

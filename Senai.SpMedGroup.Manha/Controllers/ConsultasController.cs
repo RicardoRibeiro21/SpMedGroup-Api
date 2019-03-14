@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.SpMedGroup.Manha.Domains;
@@ -31,8 +32,9 @@ namespace Senai.SpMedGroup.Manha.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }       
+        }
 
+        [Authorize(Roles = "1")]
         [HttpPost]
         public IActionResult Post(Consultas consulta)
         {
@@ -48,6 +50,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
 
         }
 
+        [Authorize(Roles = "1")]
         [HttpPut]
         public IActionResult Atualizar(Consultas consulta)
         {

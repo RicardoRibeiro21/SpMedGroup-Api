@@ -13,5 +13,7 @@ namespace Senai.SpMedGroup.Manha.Interfaces
         List<Medicos> ListarMedicos();
 
         List<Consultas> ListarConsultasDoMedico(string crmMedico);
+
+        Medicos BuscarPorCrmEmail(string crm, string email);
     }
 }

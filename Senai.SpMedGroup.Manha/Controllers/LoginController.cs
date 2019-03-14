@@ -32,7 +32,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
         {
             try
             {
- 
+                Medicos medicoBuscado = MedicoRepository.BuscarPorCrmEmail(login.Email, login.Senha);
                 Usuarios usuarioBuscado = UsuarioRepository.BuscarPorEmailSenha(login.Email, login.Senha);
                 if (usuarioBuscado == null)
 
@@ -41,12 +41,22 @@ namespace Senai.SpMedGroup.Manha.Controllers
                         mensagem = "Email ou senha inválido"
                     });
                 //SENTA QUE LÁ VEM MERDA 2.0
+                //if (medicoBuscado != null)
+                //{
+                //    var claims = new[]
+                //    {
+                //         new Claim(JwtRegisteredClaimNames.Email, medicoBuscado.Email),
+                //    new Claim(JwtRegisteredClaimNames.Jti, medicoBuscado.Crm.ToString()),
+                //    new Claim(ClaimTypes.Role, medicoBuscado.ToString())
+                //    };
+                    
                 var claims = new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.Id.ToString()),
-                    new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuario.ToString())
+                    new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuario.ToString()),
                 };
+                    
 
                 var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("sp-med-group-authentication"));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -67,7 +77,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
                     token = new JwtSecurityTokenHandler().WriteToken(token)
                 });
                 //Pode descansar agora meu rapaz 2.0
-            }
+                }
             catch(Exception ex)
             {
                 return BadRequest(ex.Message);

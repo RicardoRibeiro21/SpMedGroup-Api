@@ -7,7 +7,7 @@ namespace Senai.SpMedGroup.Manha.Domains
     public partial class Consultas
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Informe o crm do médico")]
+        [Required(ErrorMessage = "Informe o crm do médico")]      
         [StringLength(8, ErrorMessage = "O campo deve ter apenas 8 caracteres")]
         public string CrmMedico { get; set; }
         [Required(ErrorMessage = "Informe a data da consulta")]

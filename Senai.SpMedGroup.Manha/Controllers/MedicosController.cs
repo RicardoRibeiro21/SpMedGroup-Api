@@ -34,7 +34,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "1")]
         [HttpPost]
         public IActionResult Post(Medicos medico)
         {

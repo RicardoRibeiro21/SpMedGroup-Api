@@ -11,6 +11,7 @@ using Senai.SpMedGroup.Manha.Repositories;
 
 namespace Senai.SpMedGroup.Manha.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class ConsultasController : ControllerBase

@@ -55,6 +55,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
                     new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.Id.ToString()),
                     new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuario.ToString()),
+                    new Claim(ClaimTypes.Role, medicoBuscado.IdClinica.ToString())
                 };
                     
 

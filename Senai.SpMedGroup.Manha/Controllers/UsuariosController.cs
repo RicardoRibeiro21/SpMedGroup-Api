@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Senai.SpMedGroup.Manha.Domains;
@@ -50,6 +51,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Cadastrar(Usuarios usuario)
         {
@@ -64,6 +66,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpPut]
         public IActionResult Atualizar(Usuarios usuario)
         {

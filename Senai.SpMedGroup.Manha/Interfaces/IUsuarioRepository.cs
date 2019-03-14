@@ -15,5 +15,7 @@ namespace Senai.SpMedGroup.Manha.Interfaces
         List<Consultas> ListarConsultasDoUsuario(int id);
 
         List<Usuarios> ListaUsuarios();
+
+        Usuarios BuscarPorEmailSenha(string email, string senha);
     }
 }

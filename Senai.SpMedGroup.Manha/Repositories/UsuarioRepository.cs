@@ -29,6 +29,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
                 ctx.SaveChanges();
             }
         }
+
         public List<Consultas> ListarConsultasDoUsuario(int id)
         {
             string Select = "SELECT C.STATUS_CONSULTA, C.RESULTADO, C.DATA_CONSULTA, U.NOME, U.DATA_NASCIMENTO, C.ID_PRONTUARIO, P.CPF, P.RG FROM MEDICOS M JOIN CONSULTAS C ON M.CRM = C.CRM_MEDICO JOIN PRONTUARIOS P ON C.ID_PRONTUARIO = P.ID JOIN USUARIOS U ON U.ID = P.ID_USUARIO WHERE U.ID = @Id";
@@ -106,6 +107,37 @@ namespace Senai.SpMedGroup.Manha.Repositories
             }
             }
       
+        }
+
+        public Usuarios BuscarPorEmailSenha(string email, string senha)
+        {
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
+                string QuerySelect = "SELECT ID, NOME, EMAIL, SENHA, ID_TIPO_USUARIO FROM USUARIOS WHERE EMAIL = @EMAIL AND SENHA = @SENHA";
+                using (SqlCommand cmd = new SqlCommand(QuerySelect, con))
+                {
+                    cmd.Parameters.AddWithValue("@EMAIL", email);
+                    cmd.Parameters.AddWithValue("@SENHA", senha);
+                    con.Open();
+
+                    SqlDataReader sqr = cmd.ExecuteReader();
+
+                    if (sqr.HasRows)
+                    {
+                        Usuarios usuario = new Usuarios();
+                        while (sqr.Read())
+                        {
+                            usuario.Id = Convert.ToInt32(sqr["ID"]);
+                            usuario.Nome = (sqr["NOME"]).ToString();
+                            usuario.Email = (sqr["EMAIL"]).ToString();
+                            usuario.IdTipoUsuario = Convert.ToInt32(sqr["ID_TIPO_USUARIO"]);
+                        }
+                        return usuario;
+                    }
+                }
+                return null;
+            }
+
         }
     }
 }

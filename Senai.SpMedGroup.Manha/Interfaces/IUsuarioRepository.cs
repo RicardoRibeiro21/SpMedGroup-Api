@@ -12,6 +12,8 @@ namespace Senai.SpMedGroup.Manha.Interfaces
 
         void Atualizar(Usuarios usuario);
 
+        List<Consultas> ListarConsultasDoUsuario(int id);
+
         List<Usuarios> ListaUsuarios();
     }
 }

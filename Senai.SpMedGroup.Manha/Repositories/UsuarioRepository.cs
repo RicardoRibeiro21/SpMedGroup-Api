@@ -29,6 +29,45 @@ namespace Senai.SpMedGroup.Manha.Repositories
                 ctx.SaveChanges();
             }
         }
+        public List<Consultas> ListarConsultasDoUsuario(int id)
+        {
+            string Select = "SELECT C.STATUS_CONSULTA, C.RESULTADO, C.DATA_CONSULTA, U.NOME, U.DATA_NASCIMENTO, C.ID_PRONTUARIO, P.CPF, P.RG FROM MEDICOS M JOIN CONSULTAS C ON M.CRM = C.CRM_MEDICO JOIN PRONTUARIOS P ON C.ID_PRONTUARIO = P.ID JOIN USUARIOS U ON U.ID = P.ID_USUARIO WHERE U.ID = @Id";
+            List<Consultas> consultasUsuario = new List<Consultas>();
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(Select, con))
+                {
+                    cmd.Parameters.AddWithValue("@Id", id);
+                    SqlDataReader sqr = cmd.ExecuteReader();
+                    if (sqr.HasRows)
+                    {
+                        while (sqr.Read())
+                        {
+                            Consultas consulta = new Consultas()
+                            {
+                                DataConsulta = Convert.ToDateTime(sqr["DATA_CONSULTA"]),
+                                IdProntuarioNavigation = new Prontuarios()
+                                {
+                                    Cpf = sqr["CPF"].ToString(),
+                                    Rg = sqr["RG"].ToString(),
+                                    IdUsuarioNavigation = new Usuarios()
+                                    {
+                                        Nome = sqr["NOME"].ToString(),
+                                        DataNascimento = Convert.ToDateTime(sqr["DATA_NASCIMENTO"])
+                                    }
+                                },
+                                StatusConsulta = Convert.ToInt32(sqr["STATUS_CONSULTA"]),
+                                Resultado = sqr["RESULTADO"].ToString(),
+                            };
+
+                            consultasUsuario.Add(consulta);
+                        }
+                    }
+                    return consultasUsuario;
+                }
+            }
+        }
 
         public List<Usuarios> ListaUsuarios()
         {

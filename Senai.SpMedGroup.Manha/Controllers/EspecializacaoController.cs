@@ -34,6 +34,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
         [HttpPost] 
         public IActionResult Post(Especializacoes especializacao)
         {
@@ -48,6 +49,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
 
         }
+
         [HttpPut]
         public IActionResult Put(Especializacoes especializacao)
         {

@@ -36,6 +36,20 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
+        [Route("minhasConsultas")]
+        [HttpGet("{id}")]
+        public IActionResult ListarMinhasConsultas(int id)
+        {
+            try
+            {
+                return Ok(UsuarioRepository.ListarConsultasDoUsuario(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         public IActionResult Cadastrar(Usuarios usuario)
         {

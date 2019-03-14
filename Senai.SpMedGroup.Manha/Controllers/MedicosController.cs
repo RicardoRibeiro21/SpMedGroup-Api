@@ -32,6 +32,8 @@ namespace Senai.SpMedGroup.Manha.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+
         [HttpPost]
         public IActionResult Post(Medicos medico)
         {
@@ -39,6 +41,21 @@ namespace Senai.SpMedGroup.Manha.Controllers
             {
                 MedicoRepository.Cadastrar(medico);
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [Route("minhas")]
+        [HttpGet("{crmMedico}")]
+        public IActionResult ListarMinhasConsultas(string crmMedico)
+        {
+            try
+            {
+                return Ok(MedicoRepository.ListarConsultasDoMedico(crmMedico));
             }
             catch (Exception ex)
             {

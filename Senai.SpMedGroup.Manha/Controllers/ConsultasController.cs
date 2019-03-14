@@ -31,27 +31,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        [HttpGet("{crmMedico}")]
-        public IActionResult Get(string crmMedico)
-        {
-            try
-            {
-                List<Consultas> consultas = new List<Consultas>();
-                Consultas consultaBuscada = consultas.Find(x => x.CrmMedico == crmMedico);
-                consultas.Add(consultaBuscada);
-                if(consultas == null)
-                {
-                    return NotFound();
-                }
-                return Ok(ConsultaRepository.ListarConsultasDoMedico());
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
+        }       
 
         [HttpPost]
         public IActionResult Post(Consultas consulta)
@@ -67,19 +47,6 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
 
         }
-        //[HttpPut]
-        //public IActionResult Put(Consultas consulta)
-        //{
-        //    try
-        //    {
-        //        ConsultaRepository.AtualizarAdm(consulta);
-        //        return Ok();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest(ex.Message);
-        //    }
-        //}
 
         [HttpPut]
         public IActionResult Atualizar(Consultas consulta)
@@ -94,5 +61,20 @@ namespace Senai.SpMedGroup.Manha.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        //[HttpPut]
+        //public IActionResult Put(Consultas consulta)
+        //{
+        //    try
+        //    {
+        //        ConsultaRepository.AtualizarAdm(consulta);
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+        //}
+
     }
 }

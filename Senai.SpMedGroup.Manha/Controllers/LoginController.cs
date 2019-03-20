@@ -31,8 +31,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
         public IActionResult Post(LoginViewModel login)
         {
             try
-            {
-                Medicos medicoBuscado = MedicoRepository.BuscarPorCrmEmail(login.Email, login.Senha);
+            {                
                 Usuarios usuarioBuscado = UsuarioRepository.BuscarPorEmailSenha(login.Email, login.Senha);
                 if (usuarioBuscado == null)
 
@@ -40,22 +39,15 @@ namespace Senai.SpMedGroup.Manha.Controllers
                     {
                         mensagem = "Email ou senha inválido"
                     });
-                //SENTA QUE LÁ VEM MERDA 2.0
-                //if (medicoBuscado != null)
-                //{
-                //    var claims = new[]
-                //    {
-                //         new Claim(JwtRegisteredClaimNames.Email, medicoBuscado.Email),
-                //    new Claim(JwtRegisteredClaimNames.Jti, medicoBuscado.Crm.ToString()),
-                //    new Claim(ClaimTypes.Role, medicoBuscado.ToString())
-                //    };
                     
                 var claims = new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.Id.ToString()),
-                    new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuario.ToString()),
-                    new Claim(ClaimTypes.Role, medicoBuscado.IdClinica.ToString())
+                    new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.TipoUsuario.Tipo.ToString()),
+                    new Claim(ClaimTypes.Role, usuarioBuscado.TipoUsuario.Tipo.ToString()),
+                    new Claim(ClaimTypes.Role, usuarioBuscado.Id.ToString())
+                   
                 };
                     
 

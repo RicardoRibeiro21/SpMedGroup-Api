@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -37,13 +38,15 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador, Comum")]
         [Route("minhasConsultas")]
-        [HttpGet("{id}")]
-        public IActionResult ListarMinhasConsultas(int id)
+        [HttpGet]
+        public IActionResult ListarMinhasConsultas()
         {
             try
             {
-                return Ok(UsuarioRepository.ListarConsultasDoUsuario(id));
+                int idUsuario = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
+                return Ok(UsuarioRepository.ListarConsultasDoUsuario(idUsuario));
             }
             catch (Exception ex)
             {
@@ -51,7 +54,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Cadastrar(Usuarios usuario)
         {
@@ -66,7 +69,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "Administrador")]
         [HttpPut]
         public IActionResult Atualizar(Usuarios usuario)
         {

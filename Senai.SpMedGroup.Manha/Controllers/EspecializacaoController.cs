@@ -36,7 +36,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "Administrador")]
         [HttpPost] 
         public IActionResult Post(Especializacoes especializacao)
         {
@@ -52,7 +52,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
 
         }
 
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "Administrador")]
         [HttpPut]
         public IActionResult Put(Especializacoes especializacao)
         {

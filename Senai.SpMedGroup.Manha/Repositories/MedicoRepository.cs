@@ -12,43 +12,6 @@ namespace Senai.SpMedGroup.Manha.Repositories
     {
         private readonly string StringConexao = "Data Source=.\\SQLEXPRESS;Initial Catalog=SPMEDGROUP;User ID = sa; Password = 132;";
 
-        public Medicos BuscarPorCrmEmail(string crm, string email)
-        {
-            using (SqlConnection con = new SqlConnection(StringConexao))
-            {
-                string QuerySelect = "SELECT M.CRM, M.NOME, M.EMAIL, E.ESPECIALIZACAO, ID_CLINICA FROM MEDICOS M JOIN ESPECIALIZACOES E ON M.ID_ESPECIALIZACAO = E.ID WHERE EMAIL = @EMAIL AND CRM = @CRM";
-                using (SqlCommand cmd = new SqlCommand(QuerySelect, con))
-                {
-                    cmd.Parameters.AddWithValue("@EMAIL", email);
-                    cmd.Parameters.AddWithValue("@CRM", crm);
-                    con.Open();
-
-                    SqlDataReader sqr = cmd.ExecuteReader();
-
-                    if (sqr.HasRows)
-                    {
-                        while (sqr.Read())
-                        {
-                            Medicos medico = new Medicos()
-                            {
-                                Crm = (sqr["CRM"]).ToString(),
-                                Nome = (sqr["NOME"]).ToString(),
-                                Email = (sqr["EMAIL"]).ToString(),
-                                IdEspecializacaoNavigation = new Especializacoes()
-                                {
-                                    Id = Convert.ToInt32(sqr["ID"]),
-                                    Especializacao = (sqr["ESPECIALIZACAO"]).ToString()
-                                },
-                            };
-                            return medico;
-                        }
-
-                    }
-                    return null;
-                }
-            }
-        }
-
         public void Cadastrar(Medicos medico)
         {
             using(SpMedGroupContext spmed = new SpMedGroupContext())
@@ -100,5 +63,6 @@ namespace Senai.SpMedGroup.Manha.Repositories
         }
 
         public List<Medicos> ListarMedicos() => new SpMedGroupContext().Medicos.ToList();
+       
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -34,7 +35,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Post(Medicos medico)
         {
@@ -49,13 +50,15 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
-
-        [Route("minhas")]
-        [HttpGet("{crmMedico}")]
-        public IActionResult ListarMinhasConsultas(string crmMedico)
+        [Authorize(Roles = "Medico")]
+        [Route("minhasConsultas")]
+        [HttpGet]
+        public IActionResult ListarMinhasConsultas()
         {
             try
             {
+                //Armazenando o crm do medico que está logado para retornar as consultas dele   
+                string crmMedico = HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value;
                 return Ok(MedicoRepository.ListarConsultasDoMedico(crmMedico));
             }
             catch (Exception ex)

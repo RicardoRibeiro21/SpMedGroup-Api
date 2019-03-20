@@ -35,7 +35,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Post(Consultas consulta)
         {
@@ -51,7 +51,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
 
         }
 
-        [Authorize(Roles = "1")]
+        [Authorize(Roles = "Administrador, Medicos")]
         [HttpPut]
         public IActionResult Atualizar(Consultas consulta)
         {

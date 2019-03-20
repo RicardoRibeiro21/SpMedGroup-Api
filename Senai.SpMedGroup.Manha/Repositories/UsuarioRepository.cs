@@ -112,8 +112,8 @@ namespace Senai.SpMedGroup.Manha.Repositories
         public Usuarios BuscarPorEmailSenha(string email, string senha)
         {
             using (SqlConnection con = new SqlConnection(StringConexao))
-            {
-                string QuerySelect = "SELECT ID, NOME, EMAIL, SENHA, ID_TIPO_USUARIO FROM USUARIOS WHERE EMAIL = @EMAIL AND SENHA = @SENHA";
+            {                
+                string QuerySelect = "SELECT U.ID, U.NOME, U.EMAIL, U.SENHA, T.TIPO FROM USUARIOS U JOIN TIPO_USUARIO T ON U.ID_TIPO_USUARIO = T.ID WHERE U.EMAIL = @EMAIL AND U.SENHA = @SENHA";
                 using (SqlCommand cmd = new SqlCommand(QuerySelect, con))
                 {
                     cmd.Parameters.AddWithValue("@EMAIL", email);
@@ -130,7 +130,10 @@ namespace Senai.SpMedGroup.Manha.Repositories
                             usuario.Id = Convert.ToInt32(sqr["ID"]);
                             usuario.Nome = (sqr["NOME"]).ToString();
                             usuario.Email = (sqr["EMAIL"]).ToString();
-                            usuario.IdTipoUsuario = Convert.ToInt32(sqr["ID_TIPO_USUARIO"]);
+                            usuario.TipoUsuario = new TipoUsuario()
+                            {                               
+                                Tipo = (sqr["TIPO"]).ToString()
+                            };
                         }
                         return usuario;
                     }

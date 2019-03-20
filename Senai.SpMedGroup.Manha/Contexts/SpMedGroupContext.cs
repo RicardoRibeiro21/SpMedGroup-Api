@@ -169,12 +169,6 @@ namespace Senai.SpMedGroup.Manha.Domains
 
                 entity.Property(e => e.IdEspecializacao).HasColumnName("ID_ESPECIALIZACAO");
 
-                entity.Property(e => e.Nome)
-                    .IsRequired()
-                    .HasColumnName("NOME")
-                    .HasMaxLength(250)
-                    .IsUnicode(false);
-
                 entity.HasOne(d => d.IdClinicaNavigation)
                     .WithMany(p => p.Medicos)
                     .HasForeignKey(d => d.IdClinica)

@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using Senai.SpMedGroup.Manha.Domains;
+using Senai.SpMedGroup.Domains;
+
 using Senai.SpMedGroup.Manha.Interfaces;
 using Senai.SpMedGroup.Manha.Repositories;
 using Senai.SpMedGroup.Manha.Views;
@@ -39,24 +36,19 @@ namespace Senai.SpMedGroup.Manha.Controllers
                     {
                         mensagem = "Email ou senha inválido"
                     });
-                    
+
                 var claims = new[]
                 {
                     new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
-                    new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.Id.ToString()),
-                    new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.TipoUsuario.Tipo.ToString()),
-                    new Claim(ClaimTypes.Role, usuarioBuscado.TipoUsuario.Tipo.ToString()),
-                    new Claim(ClaimTypes.Role, usuarioBuscado.Id.ToString())
-                   
-                };
-                    
+                    new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.Id.ToString()),                    
+                    new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuarioNavigation.Tipo.ToString()),                   
+                };                    
 
                 var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("sp-med-group-authentication"));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
                 var token = new JwtSecurityToken(
-                       //Nome do Issuer, de onde esta vindo
-                       issuer: "SpMedGroup.Manha",
+                     //Nome do Issuer, de onde esta vindo
+                     issuer: "SpMedGroup.Manha",
                      //Nome da Audience, de onde está vindo
                      audience: "SpMedGroup.Manha",
                      claims: claims,
@@ -67,7 +59,8 @@ namespace Senai.SpMedGroup.Manha.Controllers
 
                 return Ok(new
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(token)
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    user = usuarioBuscado
                 });
                 //Pode descansar agora meu rapaz 2.0
                 }

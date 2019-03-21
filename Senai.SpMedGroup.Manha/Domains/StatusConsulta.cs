@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Senai.SpMedGroup.Manha.Domains
+namespace Senai.SpMedGroup.Domains
 {
     public partial class StatusConsulta
     {

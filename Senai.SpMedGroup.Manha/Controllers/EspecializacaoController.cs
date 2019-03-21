@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Senai.SpMedGroup.Manha.Domains;
+using Senai.SpMedGroup.Domains;
+
 using Senai.SpMedGroup.Manha.Interfaces;
 using Senai.SpMedGroup.Manha.Repositories;
 
 namespace Senai.SpMedGroup.Manha.Controllers
-{   
+{
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -36,8 +33,8 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
-        [Authorize(Roles = "Administrador")]
         [HttpPost] 
+        [Authorize(Roles = "Administrador")]
         public IActionResult Post(Especializacoes especializacao)
         {
             try

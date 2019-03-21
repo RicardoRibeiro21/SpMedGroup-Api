@@ -48,15 +48,10 @@ namespace Senai.SpMedGroup.Manha
         {
             if (env.IsDevelopment())
             {
-                app.UseMvc();
-                app.UseAuthentication();
                 app.UseDeveloperExceptionPage();
             }
-
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync("Hello World!");
-            //});
+            app.UseAuthentication();
+            app.UseMvc();
         }
     }
 }

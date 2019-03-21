@@ -1,8 +1,5 @@
-﻿using Senai.SpMedGroup.Manha.Domains;
-using System;
+﻿using Senai.SpMedGroup.Domains;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Senai.SpMedGroup.Manha.Interfaces
 {

@@ -1,10 +1,9 @@
-﻿using Senai.SpMedGroup.Manha.Domains;
+﻿using Senai.SpMedGroup.Domains;
 using Senai.SpMedGroup.Manha.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Senai.SpMedGroup.Manha.Repositories
 {
@@ -45,10 +44,10 @@ namespace Senai.SpMedGroup.Manha.Repositories
                                     Cpf = sqr["CPF"].ToString(),
                                     Rg = sqr["RG"].ToString(),
                                     IdUsuarioNavigation = new Usuarios()
-                                    {
+                                    { 
                                         Nome = sqr["NOME"].ToString(),
                                         DataNascimento = Convert.ToDateTime(sqr["DATA_NASCIMENTO"])
-                                    }
+                                    },
                                 },
                                 StatusConsulta = Convert.ToInt32(sqr["STATUS_CONSULTA"]),
                                 Resultado = sqr["RESULTADO"].ToString(),

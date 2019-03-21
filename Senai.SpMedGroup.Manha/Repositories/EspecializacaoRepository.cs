@@ -1,4 +1,4 @@
-﻿using Senai.SpMedGroup.Manha.Domains;
+﻿using Senai.SpMedGroup.Domains;
 using Senai.SpMedGroup.Manha.Interfaces;
 using System;
 using System.Collections.Generic;

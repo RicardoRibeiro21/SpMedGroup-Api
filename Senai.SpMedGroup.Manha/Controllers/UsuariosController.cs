@@ -22,6 +22,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
             UsuarioRepository = new UsuarioRepository();
         }
 
+        [Authorize(Roles = "Administrador")]
         [HttpGet]
         public IActionResult Get()
         {

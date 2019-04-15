@@ -57,8 +57,8 @@ namespace Senai.SpMedGroup.Manha.Controllers
             try
             {
                 //Armazenando o crm do medico que está logado para retornar as consultas dele   
-                string crmMedico = HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value;
-                return Ok(MedicoRepository.ListarConsultasDoMedico(crmMedico));
+                int idMedico = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
+                return Ok(MedicoRepository.ListarConsultasDoMedico(idMedico));
             }
             catch (Exception ex)
             {

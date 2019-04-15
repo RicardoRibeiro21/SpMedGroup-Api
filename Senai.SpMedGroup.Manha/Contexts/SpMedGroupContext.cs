@@ -175,8 +175,8 @@ namespace Senai.SpMedGroup.Domains
                     .HasConstraintName("FK__MEDICOS__ID_ESPE__0A688BB1");
 
                 entity.HasOne(d => d.IdUsuarioNavigation)
-                    .WithOne(p => p.Medicos)
-                    .HasForeignKey<Medicos>(d => d.IdUsuario)
+                    .WithMany(p => p.Medicos)
+                   .HasForeignKey(d => d.IdUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__MEDICOS__ID_USUA__09746778");
             });
@@ -294,7 +294,7 @@ namespace Senai.SpMedGroup.Domains
                     .HasMaxLength(250)
                     .IsUnicode(false);
 
-                entity.HasOne(d => d.IdTipoUsuarioNavigation)
+                entity.HasOne(d => d.TipoUsuario)
                     .WithMany(p => p.Usuarios)
                     .HasForeignKey(d => d.IdTipoUsuario)
                     .OnDelete(DeleteBehavior.ClientSetNull)

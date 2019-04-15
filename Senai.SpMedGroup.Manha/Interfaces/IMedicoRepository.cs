@@ -9,6 +9,6 @@ namespace Senai.SpMedGroup.Manha.Interfaces
 
         List<Medicos> ListarMedicos();
 
-        List<Consultas> ListarConsultasDoMedico(string crmMedico);
+        List<Consultas> ListarConsultasDoMedico(int idMedico);
     }
 }

@@ -30,7 +30,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
 
         public List<Consultas> ListarConsultasDoUsuario(int id)
         {
-            string Select = "SELECT C.STATUS_CONSULTA, C.RESULTADO, C.DATA_CONSULTA, U.NOME, U.DATA_NASCIMENTO, C.ID_PRONTUARIO, P.CPF, P.RG FROM MEDICOS M JOIN CONSULTAS C ON M.CRM = C.CRM_MEDICO JOIN PRONTUARIOS P ON C.ID_PRONTUARIO = P.ID JOIN USUARIOS U ON U.ID = P.ID_USUARIO WHERE U.ID = @Id";
+            string Select = "SELECT M.CRM, C.DATA_CONSULTA, U.NOME, U.DATA_NASCIMENTO, C.ID_PRONTUARIO, C.STATUS_CONSULTA, P.CPF, P.RG, C.RESULTADO FROM MEDICOS M JOIN CONSULTAS C ON M.CRM = C.CRM_MEDICO JOIN PRONTUARIOS P ON C.ID_PRONTUARIO = P.ID JOIN USUARIOS U ON U.ID = P.ID_USUARIO WHERE U.ID = @Id";
             List<Consultas> consultasUsuario = new List<Consultas>();
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
@@ -56,6 +56,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
                                         DataNascimento = Convert.ToDateTime(sqr["DATA_NASCIMENTO"])
                                     }
                                 },
+                                CrmMedico = sqr["CRM"].ToString(),
                                 StatusConsulta = Convert.ToInt32(sqr["STATUS_CONSULTA"]),
                                 Resultado = sqr["RESULTADO"].ToString(),
                             };
@@ -91,7 +92,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
                                 Nome = sqr["NOME"].ToString(),
                                 Senha = sqr["SENHA"].ToString(),
                                 Email = sqr["EMAIL"].ToString(),
-                                IdTipoUsuarioNavigation = new TipoUsuario()
+                                TipoUsuario = new TipoUsuario()
                                 {
                                     Tipo = sqr["TIPO"].ToString(),
 
@@ -128,7 +129,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
                             usuario.Id = Convert.ToInt32(sqr["ID"]);
                             usuario.Nome = (sqr["NOME"]).ToString();
                             usuario.Email = (sqr["EMAIL"]).ToString();
-                            usuario.IdTipoUsuarioNavigation = new TipoUsuario()
+                            usuario.TipoUsuario = new TipoUsuario()
                             {                               
                                 Tipo = (sqr["TIPO"]).ToString()
                             };

@@ -20,16 +20,16 @@ namespace Senai.SpMedGroup.Manha.Repositories
             }
         }
 
-        public List<Consultas> ListarConsultasDoMedico(string crmMedico)
+        public List<Consultas> ListarConsultasDoMedico(int idMedico)
         {
-            string Select = "SELECT C.STATUS_CONSULTA, C.RESULTADO, C.DATA_CONSULTA, U.NOME, U.ID, U.DATA_NASCIMENTO, C.ID_PRONTUARIO, P.ID_USUARIO, P.ID, P.CPF, P.RG FROM MEDICOS M JOIN CONSULTAS C ON M.CRM = C.CRM_MEDICO JOIN PRONTUARIOS P ON C.ID_PRONTUARIO = P.ID JOIN USUARIOS U ON U.ID = P.ID_USUARIO WHERE M.CRM = @CRM";
+            string Select = "SELECT C.STATUS_CONSULTA, C.RESULTADO, C.DATA_CONSULTA, U.NOME, U.ID, U.DATA_NASCIMENTO, C.ID_PRONTUARIO, P.ID_USUARIO, P.ID, P.CPF, P.RG FROM MEDICOS M JOIN CONSULTAS C ON M.CRM = C.CRM_MEDICO JOIN PRONTUARIOS P ON C.ID_PRONTUARIO = P.ID JOIN USUARIOS U ON U.ID = P.ID_USUARIO WHERE M.ID_USUARIO = @ID";
             List<Consultas> consultasMedico = new List<Consultas>();
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
                 con.Open();
                 using (SqlCommand cmd = new SqlCommand(Select, con))
                 {
-                    cmd.Parameters.AddWithValue("@CRM", crmMedico);
+                    cmd.Parameters.AddWithValue("@ID", idMedico);
                     SqlDataReader sqr = cmd.ExecuteReader();
                     if (sqr.HasRows)
                     {

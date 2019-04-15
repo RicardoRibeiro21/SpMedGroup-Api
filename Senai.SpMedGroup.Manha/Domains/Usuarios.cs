@@ -20,7 +20,7 @@ namespace Senai.SpMedGroup.Domains
         [DataType(DataType.Date)]
         public DateTime DataNascimento { get; set; }
 
-        public Medicos Medico { get; set; }
+        public ICollection<Medicos> Medicos { get; set; }
         public TipoUsuario TipoUsuario { get; set; }
         public Prontuarios Prontuarios { get; set; }
     }

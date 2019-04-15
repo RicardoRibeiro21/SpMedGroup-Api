@@ -37,7 +37,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
-        [Authorize(Roles = "Administrador, Comum")]
+        [Authorize(Roles = "Administrador, Comum, Medico")]
         [Route("minhasConsultas")]
         [HttpGet]
         public IActionResult ListarMinhasConsultas()

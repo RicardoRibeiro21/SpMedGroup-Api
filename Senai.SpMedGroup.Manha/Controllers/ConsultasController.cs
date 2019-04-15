@@ -18,6 +18,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
         {
             ConsultaRepository = new ConsultaRepository();
         }
+        [Authorize(Roles = "Administrador")]
         [HttpGet]
         public IActionResult Get()
         {

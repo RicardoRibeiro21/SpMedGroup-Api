@@ -46,7 +46,47 @@ namespace Senai.SpMedGroup.Manha.Repositories
         }
 
 
-        public List<Consultas> ListarConsultas() => new SpMedGroupContext().Consultas.ToList();
+        public List<Consultas> ListarConsultas() {
+
+            string Select = "SELECT M.CRM, M.ID_USUARIO AS ID_MEDICO, SC.SITUACAO, C.RESULTADO, C.DATA_CONSULTA, U.NOME, U.DATA_NASCIMENTO, C.ID_PRONTUARIO, P.CPF, P.RG FROM MEDICOS M JOIN CONSULTAS C ON M.CRM = C.CRM_MEDICO JOIN PRONTUARIOS P ON C.ID_PRONTUARIO = P.ID JOIN USUARIOS U ON U.ID = P.ID_USUARIO JOIN STATUS_CONSULTA SC ON SC.ID = C.STATUS_CONSULTA";
+
+            List<Consultas> consultasUsuario = new List<Consultas>();
+
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(Select, con))
+                {                   
+                    SqlDataReader sqr = cmd.ExecuteReader();
+                    if (sqr.HasRows)
+                    {
+                        while (sqr.Read())
+                        {
+                            Consultas consulta = new Consultas()
+                            {
+                                DataConsulta = Convert.ToDateTime(sqr["DATA_CONSULTA"]),
+                                IdProntuarioNavigation = new Prontuarios()
+                                {
+                                    Cpf = sqr["CPF"].ToString(),
+                                    Rg = sqr["RG"].ToString(),
+                                    IdUsuarioNavigation = new Usuarios()
+                                    {
+                                        Nome = sqr["NOME"].ToString(),
+                                        DataNascimento = Convert.ToDateTime(sqr["DATA_NASCIMENTO"])
+                                    }
+                                },
+                                CrmMedico = sqr["CRM"].ToString(),
+                                StatusConsulta = Convert.ToInt32(sqr["STATUS_CONSULTA"]),
+                                Resultado = sqr["RESULTADO"].ToString(),
+                            };
+
+                            consultasUsuario.Add(consulta);
+                        }
+                    }
+                    return consultasUsuario;
+                }
+            }
+        }
 
         //Método que o adm atualiza as consultas
         //public void AtualizarAdm(Consultas consulta)

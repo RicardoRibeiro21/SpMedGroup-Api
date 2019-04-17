@@ -61,7 +61,48 @@ namespace Senai.SpMedGroup.Manha.Repositories
             }
         }
 
-        public List<Medicos> ListarMedicos() => new SpMedGroupContext().Medicos.ToList();
+        public List<Medicos> ListarMedicos()
+        {
+            List<Medicos> medicos = new List<Medicos>();
+
+            string QueryMedicos = "SELECT  M.CRM, U.NOME, E.ID, E.ESPECIALIZACAO, C.RAZAO_SOCIAL FROM MEDICOS M JOIN USUARIOS U ON U.ID = M.ID_USUARIO JOIN ESPECIALIZACOES E ON E.ID = M.ID_ESPECIALIZACAO JOIN CLINICA C ON C.ID = M.ID_CLINICA";
+            
+            using(SqlConnection con = new SqlConnection(StringConexao))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(QueryMedicos, con))
+                {
+                    SqlDataReader sqr = cmd.ExecuteReader();
+
+                    if (sqr.HasRows)
+                    {
+                        while (sqr.Read())
+                        {
+                            Medicos medico = new Medicos()
+                            {
+                                Crm = sqr["CRM"].ToString(),
+                                IdUsuarioNavigation = new Usuarios()
+                                {
+                                    Nome = sqr["NOME"].ToString()
+                                },
+                                IdEspecializacaoNavigation = new Especializacoes()
+                                {
+                                    Id = Convert.ToInt32(sqr["ID"]),
+                                    Especializacao = sqr["ESPECIALIZACAO"].ToString()
+                                },
+                                IdClinicaNavigation = new Clinica()
+                                {
+                                    RazaoSocial= sqr["RAZAO_SOCIAL"].ToString()
+                                }
+                            };
+                            medicos.Add(medico);
+                        }
+                    }
+                }
+            }
+              
+            return medicos;
+        }
        
     }
 }

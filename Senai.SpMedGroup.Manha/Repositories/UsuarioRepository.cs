@@ -75,7 +75,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
             using(SqlConnection con = new SqlConnection(StringConexao))
             {
 
-                string Select = "SELECT U.ID, U.NOME, U.ID_TIPO_USUARIO, U.EMAIL, U.SENHA, T.TIPO, U.DATA_NASCIMENTO FROM USUARIOS U JOIN TIPO_USUARIO T ON U.ID_TIPO_USUARIO = T.ID ";
+                string Select = "SELECT U.ID, U.NOME, U.ID_TIPO_USUARIO, U.EMAIL, U.SENHA, T.TIPO, U.DATA_NASCIMENTO FROM USUARIOS U JOIN TIPO_USUARIO T ON U.ID_TIPO_USUARIO = T.ID  WHERE U.ID_TIPO_USUARIO = 2";
 
                 con.Open();
 

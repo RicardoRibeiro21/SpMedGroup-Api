@@ -13,11 +13,20 @@ namespace Senai.SpMedGroup.Manha.Repositories
 
         public void Cadastrar(Medicos medico)
         {
-            using(SpMedGroupContext spmed = new SpMedGroupContext())
-            {
-                spmed.Medicos.Add(medico);
-                spmed.SaveChanges();
+            string Insert = "INSERT INTO MEDICOS VALUES(@CRM, @ID_USUARIO, @ID_ESPECIALIZACAO, @ID_CLINICA)";
+            using(SqlConnection con = new SqlConnection(StringConexao))
+            {                
+                using (SqlCommand cmd = new SqlCommand(Insert, con))
+                {
+                    cmd.Parameters.AddWithValue("@CRM", medico.Crm);
+                    cmd.Parameters.AddWithValue("@ID_USUARIO", medico.IdUsuario);
+                    cmd.Parameters.AddWithValue("@ID_ESPECIALIZACAO", medico.IdEspecializacao);
+                    cmd.Parameters.AddWithValue("@ID_CLINICA", medico.IdClinica);
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
             }
+
         }
 
         public List<Consultas> ListarConsultasDoMedico(int idMedico)
@@ -65,7 +74,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
         {
             List<Medicos> medicos = new List<Medicos>();
 
-            string QueryMedicos = "SELECT  M.CRM, U.NOME, E.ID, E.ESPECIALIZACAO, C.RAZAO_SOCIAL FROM MEDICOS M JOIN USUARIOS U ON U.ID = M.ID_USUARIO JOIN ESPECIALIZACOES E ON E.ID = M.ID_ESPECIALIZACAO JOIN CLINICA C ON C.ID = M.ID_CLINICA";
+            string QueryMedicos = "SELECT  M.CRM, U.NOME, E.ID, U.EMAIL, U.DATA_NASCIMENTO, E.ID, C.ID,  E.ESPECIALIZACAO, C.RAZAO_SOCIAL FROM MEDICOS M JOIN USUARIOS U ON U.ID = M.ID_USUARIO JOIN ESPECIALIZACOES E ON E.ID = M.ID_ESPECIALIZACAO JOIN CLINICA C ON C.ID = M.ID_CLINICA";
             
             using(SqlConnection con = new SqlConnection(StringConexao))
             {
@@ -83,6 +92,8 @@ namespace Senai.SpMedGroup.Manha.Repositories
                                 Crm = sqr["CRM"].ToString(),
                                 IdUsuarioNavigation = new Usuarios()
                                 {
+                                    Email = sqr["EMAIL"].ToString(),
+                                    DataNascimento = Convert.ToDateTime(sqr["DATA_NASCIMENTO"]),
                                     Nome = sqr["NOME"].ToString()
                                 },
                                 IdEspecializacaoNavigation = new Especializacoes()

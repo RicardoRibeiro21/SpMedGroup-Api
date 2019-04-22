@@ -20,9 +20,6 @@ namespace Senai.SpMedGroup.Domains
         public int IdClinica { get; set; }
         [Required(ErrorMessage = "Informe o id do usuário")]
         public int IdUsuario { get; set; }
-        [Required(ErrorMessage = "Informe o email do médico.")]
-        [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
 
         public Usuarios IdUsuarioNavigation { get; set; }
         public Clinica IdClinicaNavigation { get; set; }

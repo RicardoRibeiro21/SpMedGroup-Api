@@ -41,7 +41,9 @@ namespace Senai.SpMedGroup.Manha.Controllers
                 {
                     new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
                     new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.Id.ToString()),                    
-                    new Claim(ClaimTypes.Role, usuarioBuscado.TipoUsuario.Tipo.ToString()),                   
+                    new Claim(ClaimTypes.Role, usuarioBuscado.TipoUsuario.Tipo.ToString()), 
+                    //Definindo a role e setando o valor dela
+                    new Claim("Role" , usuarioBuscado.TipoUsuario.Tipo.ToString())
                 };                    
 
                 var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("sp-med-group-authentication"));

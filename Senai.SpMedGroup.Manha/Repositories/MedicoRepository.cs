@@ -31,7 +31,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
 
         public List<Consultas> ListarConsultasDoMedico(int idMedico)
         {
-            string Select = "SELECT C.STATUS_CONSULTA, C.RESULTADO, C.DATA_CONSULTA, U.NOME, U.ID, U.DATA_NASCIMENTO, C.ID_PRONTUARIO, P.ID_USUARIO, P.ID, P.CPF, P.RG FROM MEDICOS M JOIN CONSULTAS C ON M.CRM = C.CRM_MEDICO JOIN PRONTUARIOS P ON C.ID_PRONTUARIO = P.ID JOIN USUARIOS U ON U.ID = P.ID_USUARIO WHERE M.ID_USUARIO = @ID";
+            string Select = "SELECT C.ID,  SC.SITUACAO, C.RESULTADO, C.DATA_CONSULTA, U.NOME, U.ID, U.DATA_NASCIMENTO, C.ID_PRONTUARIO, P.ID_USUARIO, P.ID, P.CPF, P.RG FROM MEDICOS M JOIN CONSULTAS C ON M.CRM = C.CRM_MEDICO JOIN PRONTUARIOS P ON C.ID_PRONTUARIO = P.ID JOIN USUARIOS U ON U.ID = P.ID_USUARIO JOIN STATUS_CONSULTA SC ON SC.ID = C.STATUS_CONSULTA WHERE M.ID_USUARIO = @ID";
             List<Consultas> consultasMedico = new List<Consultas>();
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
@@ -46,6 +46,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
                         {
                             Consultas consulta = new Consultas()
                             {
+                                Id = Convert.ToInt32(sqr["ID"]),
                                 DataConsulta = Convert.ToDateTime(sqr["DATA_CONSULTA"]),
                                 IdProntuarioNavigation = new Prontuarios()
                                 {
@@ -53,12 +54,15 @@ namespace Senai.SpMedGroup.Manha.Repositories
                                     Cpf = sqr["CPF"].ToString(),
                                     Rg = sqr["RG"].ToString(),
                                     IdUsuarioNavigation = new Usuarios()
-                                    { 
+                                    {
                                         Nome = sqr["NOME"].ToString(),
                                         DataNascimento = Convert.ToDateTime(sqr["DATA_NASCIMENTO"])
                                     },
                                 },
-                                StatusConsulta = Convert.ToInt32(sqr["STATUS_CONSULTA"]),
+                                StatusConsultaNavigation = new StatusConsulta()
+                                {
+                                    Situacao = sqr["SITUACAO"].ToString()
+                                },
                                 Resultado = sqr["RESULTADO"].ToString(),
                             };
 

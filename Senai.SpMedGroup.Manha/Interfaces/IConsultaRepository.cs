@@ -12,7 +12,7 @@ namespace Senai.SpMedGroup.Manha.Interfaces
         void Deletar(int id);
 
         List<Consultas> ListarConsultas();
-      
-  
+
+        Consultas BuscarPorId(int id);
     }
 }

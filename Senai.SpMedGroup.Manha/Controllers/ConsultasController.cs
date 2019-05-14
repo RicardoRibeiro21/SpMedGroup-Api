@@ -32,6 +32,21 @@ namespace Senai.SpMedGroup.Manha.Controllers
             }
         }
 
+        [Authorize(Roles = "Administrador, Medico")]        
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                
+                return Ok(ConsultaRepository.BuscarPorId(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [Authorize(Roles = "Administrador")]
         [HttpPost]
         public IActionResult Post(Consultas consulta)

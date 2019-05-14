@@ -45,7 +45,59 @@ namespace Senai.SpMedGroup.Manha.Repositories
             throw new NotImplementedException();
         }
 
+        public Consultas BuscarPorId(int id)
+        {
 
+            string Select = "SELECT C.ID,  M.CRM, M.ID_USUARIO AS ID_MEDICO, SC.SITUACAO, C.RESULTADO, C.DATA_CONSULTA, U.NOME, U.DATA_NASCIMENTO, C.ID_PRONTUARIO, P.CPF, P.RG FROM MEDICOS M JOIN CONSULTAS C ON M.CRM = C.CRM_MEDICO JOIN PRONTUARIOS P ON C.ID_PRONTUARIO = P.ID JOIN USUARIOS U ON U.ID = P.ID_USUARIO JOIN STATUS_CONSULTA SC ON SC.ID = C.STATUS_CONSULTA WHERE C.ID = @ID";            
+
+            using (SqlConnection con = new SqlConnection(StringConexao))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand(Select, con))
+                {
+                    cmd.Parameters.AddWithValue("@ID", id);
+
+                    SqlDataReader sqr = cmd.ExecuteReader();
+                    if (sqr.HasRows)
+                    {
+                        while (sqr.Read())
+                        {
+                            Consultas consulta = new Consultas()
+                            {
+                                Id = Convert.ToInt32(sqr["ID"]),
+                                DataConsulta = Convert.ToDateTime(sqr["DATA_CONSULTA"]),
+                                IdProntuarioNavigation = new Prontuarios()
+                                {
+
+                                    Cpf = sqr["CPF"].ToString(),
+                                    Rg = sqr["RG"].ToString(),
+                                    IdUsuarioNavigation = new Usuarios()
+                                    {
+                                        Nome = sqr["NOME"].ToString(),
+                                        DataNascimento = Convert.ToDateTime(sqr["DATA_NASCIMENTO"])
+                                    }
+                                },
+                                CrmMedicoNavigation = new Medicos()
+                                {
+                                    IdUsuario = Convert.ToInt32(sqr["ID_MEDICO"]),
+                                    Crm = sqr["CRM"].ToString()
+
+                                },
+
+                                StatusConsultaNavigation = new StatusConsulta()
+                                {
+                                    Situacao = sqr["SITUACAO"].ToString()
+                                },
+                                Resultado = sqr["RESULTADO"].ToString(),
+                            };
+                            
+                    return consulta;
+                        }
+                    }
+                }
+                return null;
+            }
+        }
         public List<Consultas> ListarConsultas() {
 
             string Select = "SELECT C.ID,  M.CRM, M.ID_USUARIO AS ID_MEDICO, SC.SITUACAO, C.RESULTADO, C.DATA_CONSULTA, U.NOME, U.DATA_NASCIMENTO, C.ID_PRONTUARIO, P.CPF, P.RG FROM MEDICOS M JOIN CONSULTAS C ON M.CRM = C.CRM_MEDICO JOIN PRONTUARIOS P ON C.ID_PRONTUARIO = P.ID JOIN USUARIOS U ON U.ID = P.ID_USUARIO JOIN STATUS_CONSULTA SC ON SC.ID = C.STATUS_CONSULTA";
@@ -68,7 +120,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
                                 DataConsulta = Convert.ToDateTime(sqr["DATA_CONSULTA"]),
                                 IdProntuarioNavigation = new Prontuarios()
                                 {
-                                    
+
                                     Cpf = sqr["CPF"].ToString(),
                                     Rg = sqr["RG"].ToString(),
                                     IdUsuarioNavigation = new Usuarios()
@@ -79,9 +131,11 @@ namespace Senai.SpMedGroup.Manha.Repositories
                                 },
                                 CrmMedicoNavigation = new Medicos()
                                 {
-                                    IdUsuario = Convert.ToInt32(sqr["ID_MEDICO"])
+                                    IdUsuario = Convert.ToInt32(sqr["ID_MEDICO"]),
+                                    Crm = sqr["CRM"].ToString()
+                                    
                                 },
-                                CrmMedico = sqr["CRM"].ToString(),
+                                
                                 StatusConsultaNavigation = new StatusConsulta()
                                 {
                                     Situacao = sqr["SITUACAO"].ToString()
@@ -96,6 +150,9 @@ namespace Senai.SpMedGroup.Manha.Repositories
                 }
             }
         }
+
+        
+
 
         //Método que o adm atualiza as consultas
         //public void AtualizarAdm(Consultas consulta)

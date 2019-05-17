@@ -16,7 +16,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
     public class MedicosController : ControllerBase
     {
         private IMedicoRepository MedicoRepository { get; set; }
-        public MedicosController()
+       public MedicosController()
         {
             MedicoRepository = new MedicoRepository();
         }

@@ -13,12 +13,13 @@ namespace Senai.SpMedGroup.Manha.Repositories
 
         public void AtualizarResultado(Consultas consulta)
         {
-            string Update = "UPDATE CONSULTAS SET DATA_CONSULTA = @DATA_CONSULTA,  STATUS_CONSULTA = @STATUS_CONSULTA, RESULTADO = @RESULTADO WHERE CONSULTAS.ID = @ID";
+            string Update = "UPDATE CONSULTAS SET DATA_CONSULTA = @DATA_CONSULTA,  STATUS_CONSULTA = @STATUS_CONSULTA, RESULTADO = @RESULTADO, CRM_MEDICO = @CRM WHERE CONSULTAS.ID = @ID";
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
                 con.Open();
                 SqlCommand cmd = new SqlCommand(Update, con);
-                cmd.Parameters.AddWithValue("@ID", consulta.Id);               
+                cmd.Parameters.AddWithValue("@ID", consulta.Id);
+                cmd.Parameters.AddWithValue("@CRM", consulta.CrmMedico);
                 cmd.Parameters.AddWithValue("@DATA_CONSULTA", consulta.DataConsulta);
                 cmd.Parameters.AddWithValue("@STATUS_CONSULTA", consulta.StatusConsulta);
                 cmd.Parameters.AddWithValue("@RESULTADO", consulta.Resultado);

@@ -1,9 +1,9 @@
 ﻿{
   "iisSettings": {
     "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:51255",
+      "applicationUrl": "http://192.168.3.96:5000",
       "sslPort": 44350
     }
   },
@@ -18,7 +18,7 @@
     "Senai.SpMedGroup.Manha": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5001",
+      "applicationUrl": "http://192.168.3.96:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

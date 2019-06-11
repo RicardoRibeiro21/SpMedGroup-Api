@@ -20,7 +20,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
         {
             MedicoRepository = new MedicoRepository();
         }
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador, Medico")]
         [HttpGet] 
         public IActionResult Get()
         {

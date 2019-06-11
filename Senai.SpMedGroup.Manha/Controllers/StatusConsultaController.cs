@@ -22,7 +22,7 @@ namespace Senai.SpMedGroup.Manha.Controllers
             StatusConsultaRepository = new StatusConsultaRepository();
         }
 
-        [Authorize(Roles = "Administrador")]
+        [Authorize(Roles = "Administrador, Medico")]
         [HttpGet]
         public IActionResult Listar()
         {

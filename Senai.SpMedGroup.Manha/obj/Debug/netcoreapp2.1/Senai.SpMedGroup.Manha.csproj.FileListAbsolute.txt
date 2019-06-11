@@ -26,3 +26,17 @@ C:\Users\47575406808\Desktop\Sprints\Sprint2\Senai.SpMedGroup.Manha\Senai.SpMedG
 C:\Users\47575406808\Desktop\Sprints\Sprint2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\obj\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.RazorTargetAssemblyInfo.cache
 C:\Users\47575406808\Desktop\Sprints\Sprint2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\obj\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.dll
 C:\Users\47575406808\Desktop\Sprints\Sprint2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\obj\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.pdb
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\bin\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.deps.json
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\bin\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.runtimeconfig.json
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\bin\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.runtimeconfig.dev.json
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\bin\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.dll
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\bin\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.pdb
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\obj\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.csprojAssemblyReference.cache
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\obj\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.csproj.CoreCompileInputs.cache
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\obj\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.RazorAssemblyInfo.cache
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\obj\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.RazorAssemblyInfo.cs
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\obj\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.AssemblyInfoInputs.cache
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\obj\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.AssemblyInfo.cs
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\obj\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.RazorTargetAssemblyInfo.cache
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\obj\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.dll
+C:\Users\47575406808\Desktop\Sprints\Sprint 2\Senai.SpMedGroup.Manha\Senai.SpMedGroup.Manha\obj\Debug\netcoreapp2.1\Senai.SpMedGroup.Manha.pdb

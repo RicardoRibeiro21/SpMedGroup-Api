@@ -31,7 +31,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
 
         public List<Consultas> ListarConsultasDoMedico(int idMedico)
         {
-            string Select = "SELECT C.ID,  SC.SITUACAO, C.RESULTADO, C.DATA_CONSULTA, U.NOME, U.ID, U.DATA_NASCIMENTO, C.ID_PRONTUARIO, P.ID_USUARIO, P.ID, P.CPF, P.RG FROM MEDICOS M JOIN CONSULTAS C ON M.CRM = C.CRM_MEDICO JOIN PRONTUARIOS P ON C.ID_PRONTUARIO = P.ID JOIN USUARIOS U ON U.ID = P.ID_USUARIO JOIN STATUS_CONSULTA SC ON SC.ID = C.STATUS_CONSULTA WHERE M.ID_USUARIO = @ID";
+            string Select = "SELECT C.CRM_MEDICO, C.ID,  SC.SITUACAO, C.RESULTADO, C.DATA_CONSULTA, U.NOME, U.ID, U.DATA_NASCIMENTO, C.ID_PRONTUARIO, P.ID_USUARIO, P.ID, P.CPF, P.RG FROM MEDICOS M JOIN CONSULTAS C ON M.CRM = C.CRM_MEDICO JOIN PRONTUARIOS P ON C.ID_PRONTUARIO = P.ID JOIN USUARIOS U ON U.ID = P.ID_USUARIO JOIN STATUS_CONSULTA SC ON SC.ID = C.STATUS_CONSULTA WHERE M.ID_USUARIO = @ID";
             List<Consultas> consultasMedico = new List<Consultas>();
             using (SqlConnection con = new SqlConnection(StringConexao))
             {
@@ -45,9 +45,13 @@ namespace Senai.SpMedGroup.Manha.Repositories
                         while (sqr.Read())
                         {
                             Consultas consulta = new Consultas()
-                            {
+                            {   
                                 Id = Convert.ToInt32(sqr["ID"]),
                                 DataConsulta = Convert.ToDateTime(sqr["DATA_CONSULTA"]),
+                                CrmMedicoNavigation = new Medicos
+                                {
+                                    Crm = sqr["CRM_MEDICO"].ToString()
+                                },
                                 IdProntuarioNavigation = new Prontuarios()
                                 {
                                     IdUsuario = Convert.ToInt32(sqr["ID_USUARIO"]),

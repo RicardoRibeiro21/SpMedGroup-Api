@@ -12721,11 +12721,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\47575406808\\Desktop\\Sprints\\Sprint2\\Senai.SpMedGroup.Manha\\Senai.SpMedGroup.Manha\\Senai.SpMedGroup.Manha.csproj",
+      "projectUniqueName": "C:\\Users\\47575406808\\Desktop\\Sprints\\Sprint 2\\Senai.SpMedGroup.Manha\\Senai.SpMedGroup.Manha\\Senai.SpMedGroup.Manha.csproj",
       "projectName": "Senai.SpMedGroup.Manha",
-      "projectPath": "C:\\Users\\47575406808\\Desktop\\Sprints\\Sprint2\\Senai.SpMedGroup.Manha\\Senai.SpMedGroup.Manha\\Senai.SpMedGroup.Manha.csproj",
+      "projectPath": "C:\\Users\\47575406808\\Desktop\\Sprints\\Sprint 2\\Senai.SpMedGroup.Manha\\Senai.SpMedGroup.Manha\\Senai.SpMedGroup.Manha.csproj",
       "packagesPath": "C:\\Users\\47575406808\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\47575406808\\Desktop\\Sprints\\Sprint2\\Senai.SpMedGroup.Manha\\Senai.SpMedGroup.Manha\\obj\\",
+      "outputPath": "C:\\Users\\47575406808\\Desktop\\Sprints\\Sprint 2\\Senai.SpMedGroup.Manha\\Senai.SpMedGroup.Manha\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

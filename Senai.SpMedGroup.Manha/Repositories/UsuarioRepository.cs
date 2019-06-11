@@ -56,7 +56,7 @@ namespace Senai.SpMedGroup.Manha.Repositories
                                 DataConsulta = Convert.ToDateTime(sqr["DATA_CONSULTA"]),
                                 IdProntuarioNavigation = new Prontuarios()
                                 {
-                                    Cpf = sqr["CPF"].ToString(),
+                                    Cpf = sqr["CPF"].ToString(),                                 
                                     Rg = sqr["RG"].ToString(),                                   
                                 },
                                CrmMedicoNavigation = new Medicos()
